@@ -21,10 +21,25 @@ public class PlayerAnimator : MonoBehaviour
         if (pm.moveDir.x != 0 || pm.moveDir.y != 0)
         {
             am.SetBool("Move", true);
+
+            SpriteDictionChecker();
         }
         else
         {
             am.SetBool("Move", false);
+        }
+    }
+
+    void SpriteDictionChecker()
+    {
+        if (pm.lastHorizontalVector < 0)
+        {
+            sr.flipX = true;
+
+        }
+        else
+        {
+            sr.flipX = false;
         }
     }
 }

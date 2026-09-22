@@ -6,6 +6,10 @@ public class PlayerMovment : MonoBehaviour
     public float moveSpeed;
     Rigidbody2D rb;
     [HideInInspector]
+    public float lastHorizontalVector;
+    [HideInInspector]
+    public float lastVerticalVector;
+    [HideInInspector] // This variable is hidden in the inspector but can be accessed by other scripts
     public Vector2 moveDir;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,6 +36,15 @@ public class PlayerMovment : MonoBehaviour
         float moveY = Input.GetAxisRaw("Vertical");
 
         moveDir = new Vector2(moveX, moveY).normalized;
+
+        if (moveDir.x != 0)
+        {
+            lastHorizontalVector = moveDir.x;
+        }
+        if (moveDir.y != 0)
+        {
+            lastVerticalVector = moveDir.y;
+        }
     }
 
     void Move()
