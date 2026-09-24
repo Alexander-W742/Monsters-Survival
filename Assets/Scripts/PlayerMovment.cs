@@ -5,11 +5,11 @@ public class PlayerMovment : MonoBehaviour
     // Movement
     public float moveSpeed;
     Rigidbody2D rb;
-    [HideInInspector]
+    [HideInInspector] // This variable prevents a public variable from showing up in the Unity Editor Inspector window
     public float lastHorizontalVector;
     [HideInInspector]
     public float lastVerticalVector;
-    [HideInInspector] // This variable is hidden in the inspector but can be accessed by other scripts
+    [HideInInspector] 
     public Vector2 moveDir;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
