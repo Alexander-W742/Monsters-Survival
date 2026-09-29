@@ -40,10 +40,15 @@ public class MapController : MonoBehaviour
         }
         else if (pm.moveDir.x < 0 && pm.moveDir.y == 0) // left
         {
-            if (!Physics2D.OverlapCircle(currentChunck.transform.Find("Left").position, checkerRadius, terrainMask))
+            Collider2D hit = Physics2D.OverlapCircle(currentChunck.transform.Find("Left").position, checkerRadius, terrainMask);
+            if (hit == null)
             {
                 noTerrainPosition = currentChunck.transform.Find("Left").position;
                 SpawnChunk();
+            }
+            else
+            {
+                Debug.Log("Terrain found on the left."+hit.name.ToString());
             }
         }
         else if (pm.moveDir.x == 0 && pm.moveDir.y > 0) // up

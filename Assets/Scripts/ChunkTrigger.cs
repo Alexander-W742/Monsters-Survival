@@ -10,8 +10,15 @@ public class ChunkTrigger : MonoBehaviour
     {
         mc = FindAnyObjectByType<MapController>();
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            mc.currentChunck = targetMap;
+        }
+    }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OldOnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
