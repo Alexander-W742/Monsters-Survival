@@ -1,27 +1,44 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MapController : MonoBehaviour
 {
+    // This script was created with the help of AI to help replace the old chunk spawning system.
+    // that used the physics engine to spawn new chunks on empty gameobjects.
     public List<GameObject> terrainChunks; // List of terrain chunks to spawn
-    public GameObject player; // Reference to the player object
-    public float checkerRadius; // Radius for checking if the player is within a terrain chunk
-    Vector3 noTerrainPosition; // Position where there is no terrain chunk
-    public LayerMask terrainMask; // Layer mask for terrain chunks
-    public GameObject currentChunck; // Reference to the current terrain chunk
+    public GameObject player;              // Reference to the player object
+    public float checkerRadius;            // Radius for checking if a chunk already exists
+    public Vector2 chunkSize = new Vector2(20f, 20f); // Distance between neighboring chunk centers
+    public LayerMask terrainMask;          // Layer mask for terrain chunks
+    public GameObject currentChunck;       // Chunk the player is currently on (updated automatically)
+
+    Vector3 noTerrainPosition;
     PlayerMovment pm;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         pm = FindAnyObjectByType<PlayerMovment>();
+        if (!player)
+        {
+            player = pm.gameObject;
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
+        UpdateCurrentChunk();
         Chunkchecker();
+    }
+
+    void UpdateCurrentChunk()
+    {
+        // Which terrain collider is under the player right now?
+        Collider2D hit = Physics2D.OverlapPoint(player.transform.position, terrainMask);
+        if (hit)
+        {
+            // Use the collider's root object in case the collider is on a child
+            currentChunck = hit.attachedRigidbody ? hit.attachedRigidbody.gameObject : hit.transform.root.gameObject;
+        }
     }
 
     void Chunkchecker()
@@ -30,80 +47,27 @@ public class MapController : MonoBehaviour
         {
             return;
         }
-        if (pm.moveDir.x > 0 && pm.moveDir.y == 0) // right
+
+        int dirX = pm.moveDir.x > 0 ? 1 : (pm.moveDir.x < 0 ? -1 : 0);
+        int dirY = pm.moveDir.y > 0 ? 1 : (pm.moveDir.y < 0 ? -1 : 0);
+
+        if (dirX == 0 && dirY == 0)
         {
-            if (!Physics2D.OverlapCircle(currentChunck.transform.Find("Right").position, checkerRadius, terrainMask))
-            {
-                noTerrainPosition = currentChunck.transform.Find("Right").position;
-                SpawnChunk();
-            }
+            return;
         }
-        else if (pm.moveDir.x < 0 && pm.moveDir.y == 0) // left
+
+        Vector3 checkPosition = currentChunck.transform.position + new Vector3(dirX * chunkSize.x, dirY * chunkSize.y, 0f);
+
+        if (!Physics2D.OverlapCircle(checkPosition, checkerRadius, terrainMask))
         {
-            Collider2D hit = Physics2D.OverlapCircle(currentChunck.transform.Find("Left").position, checkerRadius, terrainMask);
-            if (hit == null)
-            {
-                noTerrainPosition = currentChunck.transform.Find("Left").position;
-                SpawnChunk();
-            }
-            else
-            {
-                Debug.Log("Terrain found on the left."+hit.name.ToString());
-            }
-        }
-        else if (pm.moveDir.x == 0 && pm.moveDir.y > 0) // up
-        {
-            if (!Physics2D.OverlapCircle(currentChunck.transform.Find("Up").position, checkerRadius, terrainMask))
-            {
-                noTerrainPosition = currentChunck.transform.Find("Up").position;
-                SpawnChunk();
-            }
-        }
-        else if (pm.moveDir.x == 0 && pm.moveDir.y < 0) // down
-        {
-            if (!Physics2D.OverlapCircle(currentChunck.transform.Find("Down").position, checkerRadius, terrainMask))
-            {
-                noTerrainPosition = currentChunck.transform.Find("Down").position;
-                SpawnChunk();
-            }
-        }
-        else if (pm.moveDir.x > 0 && pm.moveDir.y > 0) // right up
-        {
-            if (!Physics2D.OverlapCircle(currentChunck.transform.Find("Right Up").position, checkerRadius, terrainMask))
-            {
-                noTerrainPosition = currentChunck.transform.Find("Right Up").position;
-                SpawnChunk();
-            }
-        }
-        else if (pm.moveDir.x > 0 && pm.moveDir.y < 0) // right down
-        {
-            if (!Physics2D.OverlapCircle(currentChunck.transform.Find("Right Down").position, checkerRadius, terrainMask))
-            {
-                noTerrainPosition = currentChunck.transform.Find("Right Down").position;
-                SpawnChunk();
-            }
-        }
-        else if (pm.moveDir.x < 0 && pm.moveDir.y > 0) // left up
-        {
-            if (!Physics2D.OverlapCircle(currentChunck.transform.Find("Left Up").position, checkerRadius, terrainMask))
-            {
-                noTerrainPosition = currentChunck.transform.Find("Left Up").position;
-                SpawnChunk();
-            }
-        }
-        else if (pm.moveDir.x < 0 && pm.moveDir.y < 0) // left down
-        {
-            if (!Physics2D.OverlapCircle(currentChunck.transform.Find("Left Down").position, checkerRadius, terrainMask))
-            {
-                noTerrainPosition = currentChunck.transform.Find("Left Down").position;
-                SpawnChunk();
-            }
+            noTerrainPosition = checkPosition;
+            SpawnChunk();
         }
     }
 
     void SpawnChunk()
     {
-        int rand = Random.Range(0, terrainChunks.Count); // Get a random index for the terrain chunk
-        Instantiate(terrainChunks[rand], noTerrainPosition, Quaternion.identity); // Instantiate the terrain chunk at the noTerrainPosition
+        int rand = Random.Range(0, terrainChunks.Count);
+        Instantiate(terrainChunks[rand], noTerrainPosition, Quaternion.identity);
     }
 }
