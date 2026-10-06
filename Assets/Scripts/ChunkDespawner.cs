@@ -7,8 +7,8 @@ public class ChunkDespawner : MonoBehaviour
 
     [HideInInspector]                        // This variable prevents a public variable from showing up in the Unity Editor Inspector window
     public MapController mc;                 // Reference to the MapController
-    public int deleteDistance = 2;           // Chunks this many steps away (or more) get deleted
-    public float checkInterval = 0.5f;       // Seconds between cleanup passes
+    public int deleteDistance = 2;           // Chunks this many far away (or more) get deleted
+    public float checkInterval = 1.0f;       // Seconds between cleanup passes
 
     float timer;
     readonly HashSet<GameObject> chunksFound = new HashSet<GameObject>();
@@ -61,7 +61,7 @@ public class ChunkDespawner : MonoBehaviour
                 continue;
             }
 
-            // How many chunk steps away is this chunk
+            // How many chunks away is this chunk
             Vector3 offset = chunk.transform.position - center;
             int stepsX = Mathf.Abs(Mathf.RoundToInt(offset.x / mc.chunkSize.x));
             int stepsY = Mathf.Abs(Mathf.RoundToInt(offset.y / mc.chunkSize.y));
