@@ -721,7 +721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChunkDespawner
   mc: {fileID: 0}
   deleteDistance: 2
-  checkInterval: 0.5
+  checkInterval: 0.2
 --- !u!1001 &4479379662562935713
 PrefabInstance:
   m_ObjectHideFlags: 0
