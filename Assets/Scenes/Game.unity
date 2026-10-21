@@ -496,7 +496,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1672373649}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1160451799
@@ -740,6 +741,56 @@ MonoBehaviour:
   mc: {fileID: 0}
   deleteDistance: 2
   checkInterval: 0.2
+--- !u!1 &1672373648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1672373649}
+  - component: {fileID: 1672373650}
+  m_Layer: 0
+  m_Name: SlimeBall Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1672373649
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672373648}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1160451797}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1672373650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672373648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88507f7a15c01c04199bd1435c7bbd1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SlimeBallController
+  Prefab: {fileID: 2692237439778525346, guid: 9ec2f2e04bfc092429e4e3b02aae0389, type: 3}
+  damage: 0
+  speed: 10
+  cooldownDuration: 2
+  currentCooldown: 0
+  pirce: 0
 --- !u!1001 &4479379662562935713
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -903,11 +954,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8345178134735170988, guid: de03c7d9187b3344aa68a86382a0ad3c, type: 3}
       propertyPath: m_Size.x
-      value: 7.36
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8345178134735170988, guid: de03c7d9187b3344aa68a86382a0ad3c, type: 3}
       propertyPath: m_Size.y
-      value: 5.48
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8345178134735170988, guid: de03c7d9187b3344aa68a86382a0ad3c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8345178134735170988, guid: de03c7d9187b3344aa68a86382a0ad3c, type: 3}
       propertyPath: m_Offset.y
