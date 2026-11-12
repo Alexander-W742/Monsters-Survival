@@ -6,6 +6,8 @@ using UnityEngine;
  */
 public class MeleeWeaponBehavure : MonoBehaviour
 {
+    public WeaponsScriptableObjects weaponData;
+
     public float destroyAfterSeconds;
 
     protected virtual void Start()

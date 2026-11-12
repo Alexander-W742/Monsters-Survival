@@ -6,8 +6,24 @@ public class ProjectialWeaponBehaver : MonoBehaviour
      * Base script for all projectile weapons [to be placed on a prefab of a weapon that is a projectile]
      */
 
+    public WeaponsScriptableObjects weaponData;
+
     protected Vector3 direction;
     public float DestroyAfterSeconds;
+
+    // current stats of projectial weapons
+    protected float currentDamage;
+    protected float currentSpeed;
+    protected float currentCooldownDuration;
+    protected int currentPierce;
+
+    void Awake()
+    {
+        currentDamage = weaponData.Damage;
+        currentSpeed = weaponData.Speed;
+        currentCooldownDuration = weaponData.CooldownDuration;
+        currentPierce = weaponData.Pierce;
+    }
 
     protected virtual void Start()
     {
@@ -60,5 +76,15 @@ public class ProjectialWeaponBehaver : MonoBehaviour
 
         transform.localScale = scale;
         transform.rotation = Quaternion.Euler(rotation);
+    }
+
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            // Refferance the script from the collided collider and deal damage using TakeDamage()
+            EnemyStats enemy = collision.GetComponent<EnemyStats>();
+            enemy.TakeDamage(currentDamage); // use currentDamage just incase I use any damage multiplyers in the future
+        }
     }
 }

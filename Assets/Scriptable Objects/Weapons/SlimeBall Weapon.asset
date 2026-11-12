@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e87a43065bf1354c9fe78088fa6b7a9, type: 3}
+  m_Name: SlimeBall Weapon
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponsScriptableObjects
+  prefab: {fileID: 2692237439778525346, guid: 9ec2f2e04bfc092429e4e3b02aae0389, type: 3}
+  damage: 5
+  speed: 10
+  cooldownDuration: 2
+  pierce: 0

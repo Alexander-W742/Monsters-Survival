@@ -105,4 +105,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0940c46598cdc2c4ebcf37a08919b661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AcidWaveBehavure
+  weaponData: {fileID: 11400000, guid: 83c6c794967be854bafa2f2e50f2c74f, type: 2}
   destroyAfterSeconds: 2
