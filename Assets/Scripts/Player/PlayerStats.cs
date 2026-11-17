@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    public CharacterScriptableObject characterData;
+    CharacterScriptableObject characterData;
 
     // current data
     [HideInInspector]
@@ -20,8 +20,14 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector]
     public float currentMagnet;
 
+    // spwaned weapons
+    public List<GameObject> spawndWeapons;
+
     private void Awake()
     {
+        characterData = CharacterSelector.GetData();
+        CharacterSelector.instance.DestorySingelton();
+
         // Assign the variables
         currentHealth = characterData.MaxHealth;
         currentRecovery = characterData.Recovery;
@@ -29,6 +35,9 @@ public class PlayerStats : MonoBehaviour
         currentMight = characterData.Might;
         currentProjectileSpeed = characterData.ProjectileSpeed;
         currentMagnet = characterData.Magnet;
+
+        // spawn the players starting weapon
+        SpawnWeapon(characterData.StartingWeapon);
     }
 
     // Experience and level of the player
@@ -151,5 +160,13 @@ public class PlayerStats : MonoBehaviour
                 currentHealth = characterData.MaxHealth;
             }
         }
+    }
+
+    public void SpawnWeapon(GameObject weapon)
+    {
+        // spwan the starting weapon
+        GameObject spawnedWeapon = Instantiate(weapon, transform.position, Quaternion.identity);
+        spawnedWeapon.transform.SetParent(transform); // sent the weapon to be a child to the player
+        spawndWeapons.Add(spawnedWeapon); // add it to the list of spawned weapons
     }
 }
