@@ -20,5 +20,14 @@ public class AcidWaveBehavure : MeleeWeaponBehavure
 
             markedEnemies.Add(collision.gameObject); // Add the enemy to the list of marked enemies so it won't take damage again from the same acid wave
         }
+        else if (collision.CompareTag("Prop"))
+        {
+            if (collision.gameObject.TryGetComponent(out BreakableProps breakable) && !markedEnemies.Contains(collision.gameObject))
+            {
+                breakable.TakeDamage(currentDamage);
+
+                markedEnemies.Add(collision.gameObject);
+            }
+        }
     }
 }

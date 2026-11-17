@@ -37,6 +37,13 @@ public class MeleeWeaponBehavure : MonoBehaviour
             EnemyStats enemy = collision.GetComponent<EnemyStats>();
             enemy.TakeDamage(currentDamage); // use currentDamage just incase I use any damage multiplyers in the future
         }
+        else if (collision.CompareTag("Prop"))
+        {
+            if (collision.gameObject.TryGetComponent(out BreakableProps breakable))
+            {
+                breakable.TakeDamage(currentDamage);
+            }
+        }
     }
 
 }

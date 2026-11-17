@@ -446,6 +446,7 @@ GameObject:
   - component: {fileID: 1160451802}
   - component: {fileID: 1160451803}
   - component: {fileID: 1160451804}
+  - component: {fileID: 1160451805}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -615,11 +616,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54a01827119ebbe488e8fb8eae04af3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovment
-  moveSpeed: 5
   lastHorizontalVector: 0
   lastVerticalVector: 0
   moveDir: {x: 0, y: 0}
   lastMovedVector: {x: 0, y: 0}
+  characterData: {fileID: 11400000, guid: 8b6796bfd5190c046b7f8294d43afb24, type: 2}
 --- !u!114 &1160451802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -661,13 +662,36 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1160451795}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fab724631af23ce4d962164609f33650, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a70c2ea7e426b447b403a254609a85b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AcidWaveController
-  weaponData: {fileID: 11400000, guid: 83c6c794967be854bafa2f2e50f2c74f, type: 2}
-  currentCooldown: 0
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
+  characterData: {fileID: 11400000, guid: 8b6796bfd5190c046b7f8294d43afb24, type: 2}
+  experience: 0
+  level: 1
+  experienceCap: 0
+  invincibilityDuration: 0.5
+  invincibilityTimer: 0
+  levelRanges:
+  - startLevel: 1
+    endLevel: 3
+    experienceCapIncreas: 100
+  - startLevel: 4
+    endLevel: 5
+    experienceCapIncreas: 200
+--- !u!114 &1160451805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160451795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1019050b77275484885c5c29db3abb8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCollector
 --- !u!1 &1314455060
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,7 +826,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1672373649
 Transform:
   m_ObjectHideFlags: 0
@@ -996,6 +1020,10 @@ PrefabInstance:
     - target: {fileID: 4795137694579071225, guid: 17ad73360d0b4a24da88f2572127ca72, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7144474865329004770, guid: 17ad73360d0b4a24da88f2572127ca72, type: 3}
+      propertyPath: drops.Array.data[0].dropRate
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7686316630378698513, guid: 17ad73360d0b4a24da88f2572127ca72, type: 3}
       propertyPath: m_Size.x

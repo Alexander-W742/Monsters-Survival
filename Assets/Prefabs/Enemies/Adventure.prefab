@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7686316630378698513}
   - component: {fileID: 8926470929301005203}
   - component: {fileID: 7344754729288121036}
+  - component: {fileID: 7144474865329004770}
   m_Layer: 0
   m_Name: Adventure
   m_TagString: Enemy
@@ -193,3 +194,19 @@ MonoBehaviour:
   currentMovSpeed: 0
   currentHealth: 0
   currentDamage: 0
+--- !u!114 &7144474865329004770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4795137694579071225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a2de3b48dc4b874f874ee0a29cadb0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DropRateManager
+  drops:
+  - name: Blue Gem
+    itemPrefab: {fileID: 2863788409159982564, guid: b5cfa8f231641d34fa7c68b48a614d45, type: 3}
+    dropRate: 50

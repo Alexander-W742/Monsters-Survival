@@ -87,6 +87,14 @@ public class ProjectialWeaponBehaver : MonoBehaviour
             enemy.TakeDamage(currentDamage); // use currentDamage just incase I use any damage multiplyers in the future
             ReducePierce();
         }
+        else if (collision.CompareTag("Prop"))
+        {
+            if (collision.gameObject.TryGetComponent(out BreakableProps breakable))
+            {
+                breakable.TakeDamage(currentDamage);
+                ReducePierce();
+            }
+        }
     }
 
     void ReducePierce() // destroy the projectile after it has hit a certain amount of enemies
