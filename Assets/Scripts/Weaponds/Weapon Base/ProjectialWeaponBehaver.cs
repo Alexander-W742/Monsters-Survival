@@ -85,6 +85,16 @@ public class ProjectialWeaponBehaver : MonoBehaviour
             // Refferance the script from the collided collider and deal damage using TakeDamage()
             EnemyStats enemy = collision.GetComponent<EnemyStats>();
             enemy.TakeDamage(currentDamage); // use currentDamage just incase I use any damage multiplyers in the future
+            ReducePierce();
+        }
+    }
+
+    void ReducePierce() // destroy the projectile after it has hit a certain amount of enemies
+    {
+        currentPierce--;
+        if (currentPierce <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }

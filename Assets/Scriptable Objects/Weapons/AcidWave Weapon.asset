@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AcidWave Weapon
   m_EditorClassIdentifier: Assembly-CSharp::WeaponsScriptableObjects
   prefab: {fileID: 447787262068548569, guid: c791dd004b900964bb12218afb2aed99, type: 3}
-  damage: 0
+  damage: 5
   speed: 0
   cooldownDuration: 3
   pierce: 0

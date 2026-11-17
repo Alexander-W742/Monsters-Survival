@@ -3,8 +3,6 @@ using UnityEngine;
 public class PlayerMovment : MonoBehaviour
 {
     // Movement
-    public float moveSpeed;
-    Rigidbody2D rb;
     [HideInInspector] // This variable prevents a public variable from showing up in the Unity Editor Inspector window
     public float lastHorizontalVector;
     [HideInInspector]
@@ -13,6 +11,10 @@ public class PlayerMovment : MonoBehaviour
     public Vector2 moveDir;
     [HideInInspector]
     public Vector2 lastMovedVector;
+
+    // refrences
+    Rigidbody2D rb;
+    public CharacterScriptableObject characterData;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -57,6 +59,6 @@ public class PlayerMovment : MonoBehaviour
 
     void Move()
     {
-        rb.linearVelocity = new Vector2(moveDir.x * moveSpeed, moveDir.y * moveSpeed);
+        rb.linearVelocity = new Vector2(moveDir.x * characterData.MoveSpeed, moveDir.y * characterData.MoveSpeed);
     }
 }

@@ -19,12 +19,12 @@ public class EnemyStats : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
-        currentHealth -= dmg;
+            currentHealth -= dmg;
 
-        if (currentHealth <= 0)
-        {
-            Kill();
-        }
+            if (currentHealth <= 0)
+            {
+                Kill();
+            }
     }
 
     public void Kill()
