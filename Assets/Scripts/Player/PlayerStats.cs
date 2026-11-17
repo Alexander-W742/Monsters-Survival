@@ -7,11 +7,18 @@ public class PlayerStats : MonoBehaviour
     public CharacterScriptableObject characterData;
 
     // current data
-    float currentHealth;
-    float currentRecovery;
-    float currentMoveSpeed;
-    float currentMight;
-    float currentProjectileSpeed;
+    [HideInInspector]
+    public float currentHealth;
+    [HideInInspector]
+    public float currentRecovery;
+    [HideInInspector]
+    public float currentMoveSpeed;
+    [HideInInspector]
+    public float currentMight;
+    [HideInInspector]
+    public float currentProjectileSpeed;
+    [HideInInspector]
+    public float currentMagnet;
 
     private void Awake()
     {
@@ -21,6 +28,7 @@ public class PlayerStats : MonoBehaviour
         currentMoveSpeed = characterData.MoveSpeed;
         currentMight = characterData.Might;
         currentProjectileSpeed = characterData.ProjectileSpeed;
+        currentMagnet = characterData.Magnet;
     }
 
     // Experience and level of the player
@@ -64,6 +72,8 @@ public class PlayerStats : MonoBehaviour
         {
             isInvicibile = false;
         }
+
+        Recover();
     }
 
     public void IncreaseExperience(int amount)
@@ -122,6 +132,20 @@ public class PlayerStats : MonoBehaviour
         {
             currentHealth += amount;
             // makes sure the players health doesn't exceed their max health
+            if (currentHealth > characterData.MaxHealth)
+            {
+                currentHealth = characterData.MaxHealth;
+            }
+        }
+    }
+
+    void Recover()
+    {
+        if (currentHealth < characterData.MaxHealth)
+        {
+            currentHealth += currentRecovery * Time.deltaTime;
+
+            // makes sure the player does not exceed their max health
             if (currentHealth > characterData.MaxHealth)
             {
                 currentHealth = characterData.MaxHealth;

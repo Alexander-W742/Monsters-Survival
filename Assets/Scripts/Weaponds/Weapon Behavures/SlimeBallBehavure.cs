@@ -9,6 +9,6 @@ public class SlimeBallBehavure : ProjectialWeaponBehaver
 
     void Update()
     {
-        transform.position += direction * weaponData.Speed * Time.deltaTime; // Move the slime ball in the specified direction at the specified speed
+        transform.position += direction * currentSpeed * Time.deltaTime; // Move the slime ball in the specified direction at the specified speed
     }
 }
